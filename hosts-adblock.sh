@@ -76,7 +76,10 @@ _download() {
 # Write MESSAGE to syslog.
 _log() {
     echo "$1"
-    type logger >/dev/null && logger -t "$0" "$1"
+
+    if type logger >/dev/null 2>&1 ; then
+        logger -t "$0" "$1"
+    fi
 }
 
 # _process FILENAME
