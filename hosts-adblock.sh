@@ -23,7 +23,6 @@ export URLS="${URLS} http://hosts-file.net/ad_servers.txt"
 export URLS="${URLS} https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext"
 export URLS="${URLS} https://www.malwaredomainlist.com/hostslist/hosts.txt"
 
-
 # _test_for_required_commands
 #
 # Test if the required commands are available.
@@ -90,7 +89,7 @@ _process() {
         _log "Processing ${FILENAME}"
         mkdir -p "${HOSTS_DIR}"
         cat "${FILENAME}" |
-        grep -v -i -e "^#" -e "localhost" -e "${HOSTNAME}" |
+        grep -v -i -e "^#" -e "localhost" |
         awk -v RS='[\n\r]+' -vIP4_ADDR="${IP4_ADDR}" -vIP6_ADDR="${IP6_ADDR}" '
             /^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+|::[0-9a-fA-F]+)\s+/ {
                 printf("%-16s %s\n", IP4_ADDR, $2)
