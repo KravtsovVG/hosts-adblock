@@ -1,7 +1,7 @@
 hosts-adblock.sh - Ad-blocker for dnsmasq hosts file
 ===
 
-host-adblock.sh is a bash script to create hosts files for [1][dnsmasq] for ad blocking.
+host-adblock.sh is a bash script to create ad blocking hosts files for [1][dnsmasq].
 
 Home routers based on DD-WRT, OpenWrt or ASUSWRT-Merlin often use dnsmasq as local DNS
 server. Dnsmasq reads additional hosts files based on the [2][`addn-hosts`] option.
