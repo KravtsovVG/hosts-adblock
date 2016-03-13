@@ -73,7 +73,7 @@ _download() {
 
 # _log MESSAGE
 #
-# Write MESSAGE to syslog.
+# Write MESSAGE to stdout and syslog (if logger command is available).
 _log() {
     echo "$1"
 
