@@ -66,7 +66,7 @@ _download() {
 
     if curl -s --compressed --head "${URL}" | grep -q 'HTTP/.*200' ; then
         _log "Downloading/updating ${URL}"
-        curl -s --compressed -z "${FILENAME}" -o "${FILENAME}" "${URL}"
+        curl -s -m 5 --connect-timeout=5 --compressed -z "${FILENAME}" -o "${FILENAME}" "${URL}"
     fi
 }
 
@@ -113,11 +113,13 @@ _test_for_required_commands || exit $?
 
 cd "${DIR}"
 
-for URL in ${URLS} ; do
-    _download "${URL}" "$(_url_filename "${URL}")"
-    _process "$(_url_filename "${URL}")"
-done
-
 if [ -w "${DNSMASQ_CONFIG}" ] ; then
     _append_config "addn-hosts=${HOSTS_DIR}" "${DNSMASQ_CONFIG}"
 fi
+
+for URL in ${URLS} ; do
+    (
+        _download "${URL}" "$(_url_filename "${URL}")"
+        _process "$(_url_filename "${URL}")"
+    ) &
+done
