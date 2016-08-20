@@ -63,10 +63,11 @@ _append_config() {
 _download() {
     local URL="$1"
     local FILENAME="$2"
+    local CURL="curl -s -m 30 --connect-timeout 10 --compressed"
 
-    if curl -s --compressed --head "${URL}" | grep -q 'HTTP/.*200' ; then
+    if ${CURL} -s --head "${URL}" | grep -q 'HTTP/.*200' ; then
         _log "Downloading/updating ${URL}"
-        curl -s -m 30 --connect-timeout 10 --compressed -z "${FILENAME}" -o "${FILENAME}" "${URL}"
+        ${CURL} -z "${FILENAME}" -o "${FILENAME}" "${URL}"
     fi
 }
 
