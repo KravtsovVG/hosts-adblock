@@ -118,8 +118,11 @@ if [ -w "${DNSMASQ_CONFIG}" ] ; then
 fi
 
 for URL in ${URLS} ; do
-    (
-        _download "${URL}" "$(_url_filename "${URL}")"
-        _process "$(_url_filename "${URL}")"
-    ) &
+    _download "${URL}" "$(_url_filename "${URL}")" &
+done
+
+wait
+
+for URL in ${URLS} ; do
+    _process "$(_url_filename "${URL}")"
 done
