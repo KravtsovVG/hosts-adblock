@@ -17,6 +17,7 @@ export IP6_ADDR="ffff::ffff"
 
 # URLs to download ad-block hosts files
 export URLS=""
+export URLS="${URLS} local.txt"
 export URLS="${URLS} https://adaway.org/hosts.txt"
 export URLS="${URLS} http://winhelp2002.mvps.org/hosts.txt"
 export URLS="${URLS} http://hosts-file.net/ad_servers.txt"
@@ -97,7 +98,7 @@ _process() {
                 printf("%-16s %s\n", IP6_ADDR, $2)
             }' >"${HOSTS_DIR}/${FILENAME}"
     else
-        _log "Processing ${FILENAME} not required, not updated"
+        _log "Processing ${FILENAME} not required, not existing or not updated"
     fi
 }
 
