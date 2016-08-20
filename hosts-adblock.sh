@@ -66,7 +66,7 @@ _download() {
 
     if curl -s --compressed --head "${URL}" | grep -q 'HTTP/.*200' ; then
         _log "Downloading/updating ${URL}"
-        curl -s -m 5 --connect-timeout=5 --compressed -z "${FILENAME}" -o "${FILENAME}" "${URL}"
+        curl -s -m 30 --connect-timeout 10 --compressed -z "${FILENAME}" -o "${FILENAME}" "${URL}"
     fi
 }
 
